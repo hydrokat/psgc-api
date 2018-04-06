@@ -1,0 +1,19 @@
+{
+  "name": "psgc",
+  "version": "1.0.0",
+  "description": "Philippine Standard Geographic Code",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon bootstrap.js"
+  },
+  "author": "Argieson Bacani",
+  "license": "ISC",
+  "dependencies": {
+    "hapi": "^17.3.1",
+    "inert": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.3"
+  }
+}
