@@ -46,7 +46,7 @@ module.exports = [
 
                 const regex = new RegExp('^' + provinceCode, 'g');
                 let municipalities = psgcObj.filter(el => String(el['Code']).match(regex));
-                municipalities = municipalities.filter(el => el['Inter-Level'] == 'Mun');
+                municipalities = municipalities.filter(el => el['Inter-Level'] == 'Mun' || el['Inter-Level'] == 'City');
 
                 provinces['municipalities'] = municipalities;
             }
