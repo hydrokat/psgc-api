@@ -1,6 +1,11 @@
 const fs = require('fs');
 const Data = fs.readFileSync(__base + 'data/psgc.json', 'utf8');
 
+const author = {
+    name: 'HackTheNorthPH',
+    website: 'hackthenorth.ph'
+}
+
 module.exports = [
     {
         method: 'GET',
@@ -8,13 +13,19 @@ module.exports = [
         handler: (request, h) => {
             let psgcObj = JSON.parse(Data);
             let regions;
+            let response = {};
 
             regions = psgcObj.filter(el => el['Inter-Level'] == 'Reg');
 
             const code = request.params.code ? encodeURIComponent(request.params.code) : 'n/a';
 
             if(code != 'n/a') {
-                regions = psgcObj.filter(el => el.Code == code);
+                regions = psgcObj.filter(el => el.Code == code && el['Inter-Level'] == 'Reg');
+
+                if(regions.length < 1) {
+                    return 'Nothing found';
+                }
+
                 regions = regions[0];
                 let regionCode = code.substr(0, 2);
 
@@ -25,7 +36,10 @@ module.exports = [
                 regions['provinces'] = provinces;
             }
 
-            return regions;
+            response.data = regions;
+            response.api_author = author;
+
+            return response;
         }
     },
     {
@@ -34,13 +48,19 @@ module.exports = [
         handler: (request, h) => {
             let psgcObj = JSON.parse(Data);
             let provinces;
+            let response = {};
 
             provinces = psgcObj.filter(el => el['Inter-Level'] == 'Prov');
 
             const code = request.params.code ? encodeURIComponent(request.params.code) : 'n/a';
 
             if(code != 'n/a') {
-                provinces = psgcObj.filter(el => el.Code == code);
+                provinces = psgcObj.filter(el => el.Code == code && el['Inter-Level'] == 'Prov');
+
+                if(provinces.length < 1) {
+                    return 'Nothing found';
+                }
+
                 provinces = provinces[0];
                 let provinceCode = code.substr(0, 4);
 
@@ -51,7 +71,10 @@ module.exports = [
                 provinces['municipalities'] = municipalities;
             }
 
-            return provinces;
+            response.data = provinces;
+            response.api_author = author;
+
+            return response;
         }
     },
     {
@@ -60,13 +83,19 @@ module.exports = [
         handler: (request, h) => {
             let psgcObj = JSON.parse(Data);
             let municipalities;
+            let response = {};
 
             municipalities = psgcObj.filter(el => el['Inter-Level'] == 'Mun');
 
             const code = request.params.code ? encodeURIComponent(request.params.code) : 'n/a';
 
             if(code != 'n/a') {
-                municipalities = psgcObj.filter(el => el.Code == code);
+                municipalities = psgcObj.filter(el => el.Code == code && (el['Inter-Level'] == 'Mun' || el['Inter-Level'] == 'City'));
+
+                if(municipalities.length < 1) {
+                    return 'Nothing found';
+                }
+
                 municipalities = municipalities[0];
                 let municipalityCode = code.substr(0, 6);
 
@@ -77,7 +106,10 @@ module.exports = [
                 municipalities['barangays'] = barangays;
             }
 
-            return municipalities;
+            response.data = municipalities;
+            response.api_author = author;
+
+            return response;
         }
     },
     {
@@ -86,8 +118,9 @@ module.exports = [
         handler: (request, h) => {
             let psgcObj = JSON.parse(Data);
             let barangay;
+            let response = {};
 
-            barangay = psgcObj.filter(el => el['Inter-Level'] == 'Bgy');
+            barangay = psgcObj.filter(el => el['Inter-Level'] == 'Bgy' && el['Inter-Level'] == 'Mun');
 
             const code = request.params.code ? encodeURIComponent(request.params.code) : 'n/a';
 
@@ -96,7 +129,10 @@ module.exports = [
                 barangay = barangay[0];
             }
 
-            return barangay;
+            response.data = barangay;
+            response.api_author = author;
+
+            return response;
         }
     }
 ];
