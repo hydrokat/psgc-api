@@ -9,6 +9,17 @@ const author = {
 module.exports = [
     {
         method: 'GET',
+        path: '/',
+        handler: (request, h) => {
+            let psgcObj = JSON.parse(Data);
+            let regions;
+            let response = "Use /reg/{code?} or /prov/{code?} or /mun/{code?} or /bgy/{code?}. Use without the code to view all.";
+
+            return response;
+        }
+    },
+    {
+        method: 'GET',
         path: '/reg/{code?}',
         handler: (request, h) => {
             let psgcObj = JSON.parse(Data);

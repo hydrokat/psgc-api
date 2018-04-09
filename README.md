@@ -1,18 +1,14 @@
-# Project Title
+# PSGC API
 
-One Paragraph of project description goes here
+PSGC API provides you with an API to list regions, provinces, municipalities, and baranggays. Data from [PSA](http://nap.psa.gov.ph/activestats/psgc/PSGC%20Summary%20of%20Changes%20Dec2017.xlsx).
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Philippine Statistics Authority (PSA) explains the codes [here](http://nap.psa.gov.ph/activestats/psgc/articles/tech_struct.asp). You will also need nodejs and npm to run this project.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
+You will need what HapiJS needs. ;) Namely nodejs and npm.
 
 ### Installing
 
@@ -38,8 +34,6 @@ node bootstrap.js
 
 * [HapiJS](https://hapijs.com) - NodeJS framework
 
-
-
 ## Authors
 
 * **Argieson Bacani** - *Initial work* - [Hydrokat](https://github.com/hydrokat143)
@@ -48,4 +42,4 @@ node bootstrap.js
 
 Shoutouts to the following:
 
-* [HackTheNorthPH](http://hackthenorth.ph/)
+* [HackTheNorthPH](http://hackthenorth.ph/) - you guys are the best!
